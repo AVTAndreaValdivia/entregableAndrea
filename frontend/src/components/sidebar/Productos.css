@@ -1,0 +1,107 @@
+.productos-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fdfdfd;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.formulario input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.formulario button {
+  grid-column: span 2;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.formulario button:hover {
+  background-color: #0056b3;
+}
+
+.subtitulo {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.mensaje {
+  font-style: italic;
+  color: #888;
+}
+
+.lista-productos {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.producto-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.producto-card .info {
+  flex: 1;
+}
+
+.producto-card .info p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.acciones button {
+  margin-left: 8px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-editar {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.btn-eliminar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-editar:hover {
+  background-color: #e0a800;
+}
+
+.btn-eliminar:hover {
+  background-color: #c82333;
+}
