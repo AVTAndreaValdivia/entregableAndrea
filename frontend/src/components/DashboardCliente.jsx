@@ -127,10 +127,20 @@ function DashboardCliente() {
 
     try {
       const response = await axios.post('http://localhost:5000/api/ollama', {
-        prompt: `Eres un asistente de compras para una tienda en línea. El usuario ha dicho: "${userInput}". 
-        Productos disponibles: ${productos.map(p => p.nombre).join(', ')}. 
-        Carrito actual: ${carrito.length > 0 ? carrito.map(i => `${i.nombre} (${i.cantidad})`).join(', ') : 'vacío'}. 
-        Responde de manera útil y concisa.`
+        prompt: `
+Actúa como un asistente virtual experto en una tienda en línea. Tu tarea es ayudar al usuario a navegar por los productos, sugerir opciones, resolver dudas sobre su carrito y mejorar su experiencia de compra.
+Información del usuario:
+- Nombre: ${nombre}
+- Carrito actual: ${carrito.length > 0 ? carrito.map(i => `${i.nombre} (x${i.cantidad})`).join(', ') : 'Vacío'}
+
+Inventario disponible (${productos.length} productos):
+${productos.map(p => `- ${p.nombre} ($${p.precio.toFixed(2)}, ${p.stock} en stock)`).join('\n')}
+
+Mensaje del usuario:
+"${userInput}"
+
+Tu respuesta debe ser clara, concisa, empática y útil. Utiliza un tono amigable, responde en español, y si puedes, haz recomendaciones o guía sobre el siguiente paso lógico.`
+
       });
 
       setAiMessages(prev => [...prev, {
@@ -248,7 +258,7 @@ function DashboardCliente() {
                   </li>
                 ))}
               </ul>
-              
+
               <div style={styles.cartSummary}>
                 <div style={styles.totalRow}>
                   <span>Subtotal:</span>
@@ -258,11 +268,11 @@ function DashboardCliente() {
                   <span>Envío:</span>
                   <span>$0.00</span>
                 </div>
-                <div style={{...styles.totalRow, ...styles.grandTotal}}>
+                <div style={{ ...styles.totalRow, ...styles.grandTotal }}>
                   <span>Total:</span>
                   <span>${carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0).toFixed(2)}</span>
                 </div>
-                
+
                 <button
                   onClick={finalizarCompra}
                   style={styles.checkoutButton}
@@ -276,7 +286,7 @@ function DashboardCliente() {
       </div>
 
       {/* Asistente de IA */}
-      <button 
+      <button
         onClick={toggleAiAssistant}
         style={styles.aiButton}
       >
@@ -287,18 +297,18 @@ function DashboardCliente() {
         <div style={styles.aiPanel}>
           <div style={styles.aiHeader}>
             <h3 style={styles.aiTitle}>Asistente de Compras</h3>
-            <button 
+            <button
               onClick={toggleAiAssistant}
               style={styles.aiCloseButton}
             >
               ×
             </button>
           </div>
-          
+
           <div style={styles.aiMessagesContainer}>
             {aiMessages.map((message, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 style={{
                   ...styles.aiMessage,
                   ...(message.sender === 'user' ? styles.userMessage : styles.assistantMessage)
@@ -315,7 +325,7 @@ function DashboardCliente() {
               </div>
             )}
           </div>
-          
+
           <form onSubmit={handleAiSubmit} style={styles.aiForm}>
             <input
               type="text"
@@ -325,7 +335,7 @@ function DashboardCliente() {
               style={styles.aiInput}
               disabled={aiLoading}
             />
-            <button 
+            <button
               type="submit"
               style={styles.aiSubmitButton}
               disabled={aiLoading || !userInput.trim()}
