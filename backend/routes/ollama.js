@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
     const response = await axios.post(
       'http://localhost:11434/api/generate',
       {
-        model: 'gemma:2b',  // Asegúrate que este modelo esté descargado en Ollama
+        model: 'gemma:2b',  
         prompt: prompt,
         stream: false,
       },
